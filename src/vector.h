@@ -1,6 +1,7 @@
 #pragma once
 
 #include "destructor.h"
+#include <stddef.h>
 typedef struct vector_t vector_t;
 
 vector_t *create_vector(size_t initial_size, size_t element_size,

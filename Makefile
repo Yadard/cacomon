@@ -12,7 +12,8 @@ CC_FLAGS=-c         \
          -W         \
          -Wall      \
          -ansi      \
-         -pedantic
+         -pedantic  \
+		 -std=c11
 
 RM = rm -rf
 

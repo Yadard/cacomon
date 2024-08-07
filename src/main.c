@@ -1,7 +1,10 @@
+#include "deck.h"
+#include "hashmap.h"
 #include <stdint.h>
 #include <stdlib.h>
 
 #define DEFAULT_PLAYER_AMOUNT 2
+#define ITERATIONS_SHUFFLE 50
 #define DEFAULT_HAND_SIZE 5
 
 #include "game.h"
@@ -20,7 +23,22 @@ int main(int argc, const char **argv) {
   pokedex_t *pokedex = load_pokedex("./pokemon.csv");
   deck_t *deck = create_deck();
 
-  game_t *game = create_game(player_amount, deck);
+  hashmap_iter_t *it = create_hashmap_iter();
+  hashmap_iter_t *end = create_hashmap_iter();
+  pokedex_begin(pokedex, it);
+  pokedex_end(pokedex, end);
+  for (; !hashmap_iter_equal(it, end); hashmap_iter_next(it)) {
+    card_t *card = hashmap_iter_get(it);
+    deck_push(deck, card);
+  }
+
+  deck_shuffle(deck, ITERATIONS_SHUFFLE);
+
+  game_t *game = create_game(player_amount, hand_size, pokedex, deck);
+  while (game_runing(game))
+    game_loop(game);
+
+  destroy_game(&game);
 
   return EXIT_SUCCESS;
 }

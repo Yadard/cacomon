@@ -1,8 +1,7 @@
-#pragma once
-
 #include "hashmap.h"
 #include "destructor.h"
 #include "vector.h"
+#include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 

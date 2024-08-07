@@ -2,6 +2,7 @@
 
 #include "destructor.h"
 #include <stdbool.h>
+#include <stddef.h>
 
 typedef struct hashmap_t hashmap_t;
 typedef struct hashmap_entry_t hashmap_entry_t;

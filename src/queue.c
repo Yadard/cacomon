@@ -1,4 +1,5 @@
 #include "queue.h"
+#include "vector.h"
 #include <stdlib.h>
 
 typedef struct queue_t {
@@ -46,6 +47,15 @@ void *queue_pop(queue_t *queue) {
   vector_pop(queue->vec);
   return vector_at(queue->vec, i);
 }
+
+void *queue_at(queue_t *queue, size_t index) {
+  return vector_at(queue->vec, index);
+}
+void queue_assign(queue_t *queue, size_t index, void *data) {
+  vector_assign(queue->vec, index, data);
+}
+
+size_t queue_size(queue_t *queue) { return vector_size(queue->vec); }
 
 void destroy_queue(queue_t **queue) {
   if (!queue)
